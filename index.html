@@ -35,6 +35,29 @@ h1{
     font-size:1.2rem;
     margin-top:10px;
 }
+    .countdown-container{
+    display:flex;
+    justify-content:center;
+    gap:0;
+    margin-top:20px;
+}
+
+.box{
+    border:1px solid white;
+    min-width:90px;
+    padding:15px 10px;
+    text-align:center;
+}
+
+.box div:first-child{
+    font-size:2rem;
+    font-weight:bold;
+    margin-bottom:8px;
+}
+
+.box div:last-child{
+    font-size:1rem;
+}
 
 </style>
 
@@ -49,7 +72,29 @@ h1{
         Time remaining to have your say
     </div>
 
-    <div id="countdown"></div>
+    <div class="countdown-container">
+
+    <div class="box">
+        <div id="days">00</div>
+        <div>DAYS</div>
+    </div>
+
+    <div class="box">
+        <div id="hours">00</div>
+        <div>HRS</div>
+    </div>
+
+    <div class="box">
+        <div id="minutes">00</div>
+        <div>MINS</div>
+    </div>
+
+    <div class="box">
+        <div id="seconds">00</div>
+        <div>SECS</div>
+    </div>
+
+</div>
 
 </div>
 
@@ -67,8 +112,17 @@ function updateCountdown(){
     const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
     const seconds = Math.floor((difference % (1000 * 60)) / 1000);
 
-    document.getElementById("countdown").innerHTML =
-        `${days} Days ${String(hours).padStart(2,'0')} Hours ${String(minutes).padStart(2,'0')} Minutes ${String(seconds).padStart(2,'0')} Seconds`;
+    document.getElementById("days").textContent =
+String(days);
+
+document.getElementById("hours").textContent =
+String(hours).padStart(2,'0');
+
+document.getElementById("minutes").textContent =
+String(minutes).padStart(2,'0');
+
+document.getElementById("seconds").textContent =
+String(seconds).padStart(2,'0');
 
 }
 
