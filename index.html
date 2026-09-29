@@ -8,38 +8,37 @@
 
 <style>
 
+CSS
 body{
-    margin:0;
-    color:white;
-    font-family:'Segoe UI', sans-serif;
-    text-align:center;
-    position:relative;
-    overflow:hidden;
+margin:0;
+color:#000;
+font-family:'Segoe UI', sans-serif;
+text-align:center;
+position:relative;
+overflow:hidden;
 }
-
+ 
 body::before{
-    content:"";
-    position:absolute;
-    inset:0;
-
-    background:
-        linear-gradient(
-            rgba(0,94,184,0.6),
-            rgba(0,94,184,0.6)
-        ),
-        url('people-promise.png');
-
-    background-size:cover;
-    background-position:center;
-    background-repeat:no-repeat;
-
-    opacity:1;
-
-    z-index:-1;
+content:"";
+position:absolute;
+top:0;
+left:0;
+width:100%;
+height:100%;
+ 
+background-image:url('people-promise.png');
+background-size:cover;
+background-position:center;
+background-repeat:no-repeat;
+ 
+opacity:0.5;
+ 
+z-index:-1;
 }
 
 .banner{
-    padding:30px;
+background:rgba(255,255,255,0.75);
+padding:20px;
 }
 
 h1{
@@ -65,7 +64,7 @@ h1{
 }
 
 .box{
-    border:1px solid white;
+    border:1px solid #000;
     min-width:90px;
     padding:15px 10px;
     text-align:center;
