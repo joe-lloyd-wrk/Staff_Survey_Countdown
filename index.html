@@ -23,6 +23,7 @@ body{
 
 .poster img{
     width:100%;
+    height:auto;
     display:block;
 }
 
@@ -30,10 +31,9 @@ body{
 
     position:absolute;
 
-    left:5%;
-    top:68%;
-
-    width:46%;
+    left:4%;
+    top:72%;
+    width:48%;
 
     display:flex;
     justify-content:space-evenly;
@@ -52,16 +52,16 @@ body{
     font-size:4rem;
     font-weight:700;
     line-height:1;
-    text-shadow:0 2px 6px rgba(0,0,0,0.3);
+    text-shadow:0 2px 6px rgba(0,0,0,0.4);
 }
 
 .counter label{
     display:block;
-    margin-top:10px;
+    margin-top:8px;
     font-size:1rem;
     font-weight:600;
     letter-spacing:1px;
-    text-shadow:0 2px 6px rgba(0,0,0,0.3);
+    text-shadow:0 2px 6px rgba(0,0,0,0.4);
 }
 
 @media (max-width:1200px){
@@ -71,15 +71,15 @@ body{
     }
 
     .counter label{
-        font-size:0.9rem;
+        font-size:0.8rem;
     }
 }
 
 @media (max-width:800px){
 
     .countdown-overlay{
-        top:69%;
-        width:48%;
+        top:72%;
+        width:50%;
     }
 
     .counter span{
@@ -87,7 +87,7 @@ body{
     }
 
     .counter label{
-        font-size:0.7rem;
+        font-size:0.6rem;
     }
 }
 
@@ -97,10 +97,10 @@ body{
 <body>
 
 <div class="poster">
- 
-Staff-Survey-Mock-up-V4.png
- 
-<div class="countdown-overlay">
+
+    Staff-Survery-Mock-up-V4.png
+
+    <div class="countdown-overlay">
 
         <div class="counter">
             <span id="days">00</span>
@@ -113,61 +113,4 @@ Staff-Survey-Mock-up-V4.png
         </div>
 
         <div class="counter">
-            <span id="minutes">00</span>
-            <label>MINUTES</label>
-        </div>
-
-        <div class="counter">
-            <span id="seconds">00</span>
-            <label>SECONDS</label>
-        </div>
-
-    </div>
-
-</div>
-
-<script>
-
-const surveyEnd = new Date("2026-11-27T23:59:00+00:00");
-
-function updateCountdown(){
-
-    const now = new Date();
-    const difference = surveyEnd - now;
-
-    const days = Math.floor(difference / (1000 * 60 * 60 * 24));
-    const hours = Math.floor(
-        (difference % (1000 * 60 * 60 * 24))
-        / (1000 * 60 * 60)
-    );
-
-    const minutes = Math.floor(
-        (difference % (1000 * 60 * 60))
-        / (1000 * 60)
-    );
-
-    const seconds = Math.floor(
-        (difference % (1000 * 60))
-        / 1000
-    );
-
-    document.getElementById("days").textContent =
-        String(days);
-
-    document.getElementById("hours").textContent =
-        String(hours).padStart(2,'0');
-
-    document.getElementById("minutes").textContent =
-        String(minutes).padStart(2,'0');
-
-    document.getElementById("seconds").textContent =
-        String(seconds).padStart(2,'0');
-}
-
-updateCountdown();
-setInterval(updateCountdown,1000);
-
-</script>
-
-</body>
-</html>
+            <span id="minutes">00
