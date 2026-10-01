@@ -4,99 +4,122 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Staff Survey Countdown</title>
+<title>NHS Staff Survey Countdown</title>
 
 <style>
 
 body{
     margin:0;
-    color:#000;
-    font-family:'Segoe UI', sans-serif;
-    text-align:center;
-
-    background-image:url('./people-promise.png');
-    background-size:contain;
-    background-position:center;
-    background-repeat:no-repeat;
-    background-attachment:fixed;
-
-    min-height:100vh;
+    font-family:'Segoe UI',sans-serif;
+    background:#ffffff;
 }
 
-.banner{
-    background:rgba(255,255,255,0.6);
-    padding:20px;
+.poster{
+    position:relative;
+    width:100%;
+    max-width:1600px;
+    margin:auto;
 }
 
-h1{
-    margin:0;
-    font-size:2rem;
+.poster img{
+    width:100%;
+    display:block;
 }
 
-.subtitle{
-    font-size:1.2rem;
-    margin-top:10px;
-}
+.countdown-overlay{
 
-.countdown-container{
+    position:absolute;
+
+    left:5%;
+    top:68%;
+
+    width:46%;
+
     display:flex;
-    justify-content:center;
-    gap:0;
-    margin-top:20px;
-}
+    justify-content:space-evenly;
+    align-items:center;
 
-.box{
-    border:1px solid #000;
-    min-width:90px;
-    padding:15px 10px;
     text-align:center;
-    background:rgba(255,255,255,0.7);
+    color:white;
 }
 
-.box div:first-child{
-    font-size:2rem;
-    font-weight:bold;
-    margin-bottom:8px;
+.counter{
+    flex:1;
 }
 
-.box div:last-child{
+.counter span{
+    display:block;
+    font-size:4rem;
+    font-weight:700;
+    line-height:1;
+    text-shadow:0 2px 6px rgba(0,0,0,0.3);
+}
+
+.counter label{
+    display:block;
+    margin-top:10px;
     font-size:1rem;
+    font-weight:600;
+    letter-spacing:1px;
+    text-shadow:0 2px 6px rgba(0,0,0,0.3);
+}
+
+@media (max-width:1200px){
+
+    .counter span{
+        font-size:3rem;
+    }
+
+    .counter label{
+        font-size:0.9rem;
+    }
+}
+
+@media (max-width:800px){
+
+    .countdown-overlay{
+        top:69%;
+        width:48%;
+    }
+
+    .counter span{
+        font-size:2rem;
+    }
+
+    .counter label{
+        font-size:0.7rem;
+    }
 }
 
 </style>
-
 </head>
 
 <body>
 
-<div class="banner">
+<div class="poster">
 
-    <h1>🗣️ University Hospitals of Liverpool National NHS Staff Survey 2026</h1>
+    <img src="Staffock up V4.png
 
-    <div class="subtitle">
-        Time remaining to have your say
-    </div>
+    <div class="countdown-overlay">
 
-    <div class="countdown-container">
-
-        <div class="box">
-            <div id="days">00</div>
-            <div>DAYS</div>
+        <div class="counter">
+            <span id="days">00</span>
+            <label>DAYS</label>
         </div>
 
-        <div class="box">
-            <div id="hours">00</div>
-            <div>HRS</div>
+        <div class="counter">
+            <span id="hours">00</span>
+            <label>HOURS</label>
         </div>
 
-        <div class="box">
-            <div id="minutes">00</div>
-            <div>MINS</div>
+        <div class="counter">
+            <span id="minutes">00</span>
+            <label>MINUTES</label>
         </div>
 
-        <div class="box">
-            <div id="seconds">00</div>
-            <div>SECS</div>
+        <div class="counter">
+            <span id="seconds">00</span>
+            <label>SECONDS</label>
         </div>
 
     </div>
@@ -113,18 +136,38 @@ function updateCountdown(){
     const difference = surveyEnd - now;
 
     const days = Math.floor(difference / (1000 * 60 * 60 * 24));
-    const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-    const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
-    const seconds = Math.floor((difference % (1000 * 60)) / 1000);
+    const hours = Math.floor(
+        (difference % (1000 * 60 * 60 * 24))
+        / (1000 * 60 * 60)
+    );
 
-    document.getElementById("days").textContent = days;
-    document.getElementById("hours").textContent = String(hours).padStart(2,'0');
-    document.getElementById("minutes").textContent = String(minutes).padStart(2,'0');
-    document.getElementById("seconds").textContent = String(seconds).padStart(2,'0');
+    const minutes = Math.floor(
+        (difference % (1000 * 60 * 60))
+        / (1000 * 60)
+    );
 
+    const seconds = Math.floor(
+        (difference % (1000 * 60))
+        / 1000
+    );
+
+    document.getElementById("days").textContent =
+        String(days);
+
+    document.getElementById("hours").textContent =
+        String(hours).padStart(2,'0');
+
+    document.getElementById("minutes").textContent =
+        String(minutes).padStart(2,'0');
+
+    document.getElementById("seconds").textContent =
+        String(seconds).padStart(2,'0');
 }
 
 updateCountdown();
 setInterval(updateCountdown,1000);
 
 </script>
+
+</body>
+</html>
