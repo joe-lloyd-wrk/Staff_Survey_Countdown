@@ -28,41 +28,43 @@ body{
 }
 
 .countdown-overlay{
-
-    position:absolute;
-
-    left:4%;
-    top:72%;
-    width:48%;
-
-    display:flex;
-    justify-content:space-evenly;
-    align-items:center;
-
-    text-align:center;
-    color:white;
+position:absolute;
+ 
+left:6%;
+top:79%;
+ 
+width:44%;
+ 
+display:flex;
+justify-content:space-between;
+align-items:center;
+ 
+text-align:center;
+color:white;
 }
 
 .counter{
-    flex:1;
+width:25%;
 }
-
+ 
 .counter span{
-    display:block;
-    font-size:4rem;
-    font-weight:700;
-    line-height:1;
-    text-shadow:0 2px 6px rgba(0,0,0,0.4);
+display:block;
+font-size:3.5rem;
+font-weight:700;
+line-height:1;
+text-shadow:0 3px 8px rgba(0,0,0,0.5);
 }
-
+ 
 .counter label{
-    display:block;
-    margin-top:8px;
-    font-size:1rem;
-    font-weight:600;
-    letter-spacing:1px;
-    text-shadow:0 2px 6px rgba(0,0,0,0.4);
+display:block;
+margin-top:10px;
+font-size:0.9rem;
+font-weight:600;
+letter-spacing:1px;
+text-shadow:0 3px 8px rgba(0,0,0,0.5);
 }
+    updateCountdown();
+    console.log("Countdown running");
 
 @media (max-width:1200px){
 
