@@ -1,120 +1,209 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>NHS Staff Survey Countdown</title>
+    <title>NHS Staff Survey Countdown</title>
 
-<style>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
 
-body{
-    margin:0;
-    font-family:'Segoe UI',sans-serif;
-    background:#ffffff;
-}
+        html,
+        body {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            background: #ffffff;
+            font-family: "Segoe UI", Arial, sans-serif;
+        }
 
-.poster{
-    position:relative;
-    width:100%;
-    max-width:1600px;
-    margin:auto;
-}
+        .poster {
+            position: relative;
+            width: 100%;
+            max-width: 1600px;
+            margin: 0 auto;
+            overflow: hidden;
+        }
 
-.poster img{
-    width:100%;
-    height:auto;
-    display:block;
-}
+        .poster-image {
+            display: block;
+            width: 100%;
+            height: auto;
+        }
 
-.countdown-overlay{
-position:absolute;
- 
-left:6%;
-top:79%;
- 
-width:44%;
- 
-display:flex;
-justify-content:space-between;
-align-items:center;
- 
-text-align:center;
-color:white;
-}
+        .countdown-overlay {
+            position: absolute;
 
-.counter{
-width:25%;
-}
- 
-.counter span{
-display:block;
-font-size:3.5rem;
-font-weight:700;
-line-height:1;
-text-shadow:0 3px 8px rgba(0,0,0,0.5);
-}
- 
-.counter label{
-display:block;
-margin-top:10px;
-font-size:0.9rem;
-font-weight:600;
-letter-spacing:1px;
-text-shadow:0 3px 8px rgba(0,0,0,0.5);
-}
-    updateCountdown();
-    console.log("Countdown running");
+            /*
+            These percentages position the countdown
+            inside the large blue panel.
+            */
+            left: 3.2%;
+            top: 77%;
+            width: 50.5%;
 
-@media (max-width:1200px){
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            align-items: centre;
 
-    .counter span{
-        font-size:3rem;
-    }
+            color: #ffffff;
+            text-align: centre;
+        }
 
-    .counter label{
-        font-size:0.8rem;
-    }
-}
+        .counter {
+            min-width: 0;
+            text-align: centre;
+        }
 
-@media (max-width:800px){
+        .counter-number {
+            display: block;
+            font-size: clamp(22px, 4vw, 64px);
+            font-weight: 800;
+            line-height: 1;
+            color: #ffffff;
+            text-shadow: 0 3px 7px rgba(0, 0, 0, 0.45);
+        }
 
-    .countdown-overlay{
-        top:72%;
-        width:50%;
-    }
+        .counter-label {
+            display: block;
+            margin-top: 8px;
+            font-size: clamp(8px, 1vw, 16px);
+            font-weight: 700;
+            line-height: 1;
+            letter-spacing: 0.5px;
+            color: #ffffff;
+            text-transform: uppercase;
+            text-shadow: 0 2px 5px rgba(0, 0, 0, 0.45);
+        }
 
-    .counter span{
-        font-size:2rem;
-    }
+        @media (max-width: 700px) {
+            .countdown-overlay {
+                left: 3.2%;
+                top: 77%;
+                width: 50.5%;
+            }
 
-    .counter label{
-        font-size:0.6rem;
-    }
-}
-
-</style>
+            .counter-label {
+                margin-top: 4px;
+                letter-spacing: 0;
+            }
+        }
+    </style>
 </head>
 
 <body>
 
-<div class="poster">
+    <main class="poster">
 
-    <div class="poster">
+        ./Staff-Survery-Mock-up-V4.png
 
-    <img src="Staff-Survery-Mock-up-V4.png" alt="Staff Survey Overlay">
+        <div
+            class="countdown-overlay"
+            id="countdown"
+            aria-label="Time remaining until the NHS Staff Survey closes"
+        >
+            <div class="counter">
+                <span class="counter-number" id="days">00</span>
+                <span class="counter-label">Days</span>
+            </div>
 
-    <div class="countdown-overlay">
+            <div class="counter">
+                <span class="counter-number" id="hours">00</span>
+                <span class="counter-label">Hours</span>
+            </div>
 
-        <div class="counter">
-            <span id="days">00</span>
-            <label>DAYS</label>
+            <div class="counter">
+                <span class="counter-number" id="minutes">00</span>
+                <span class="counter-label">Minutes</span>
+            </div>
+
+            <div class="counter">
+                <span class="counter-number" id="seconds">00</span>
+                <span class="counter-label">Seconds</span>
+            </div>
         </div>
 
-        <div class="counter">
-            <span id="hours">00</span>
-            <label>HOURS</label>
-        </div>
+    </main>
 
-        <div class="counter">
-            <span id="minutes">00
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+
+            /*
+            Survey closes at 23:59 GMT on 27 November 2026.
+            */
+            const surveyEnd = new Date("2026-11-27T23:59:00Z").getTime();
+
+            const daysElement = document.getElementById("days");
+            const hoursElement = document.getElementById("hours");
+            const minutesElement = document.getElementById("minutes");
+            const secondsElement = document.getElementById("seconds");
+            const countdownElement = document.getElementById("countdown");
+
+            function updateCountdown() {
+                const now = Date.now();
+                const difference = surveyEnd - now;
+
+                if (difference <= 0) {
+                    daysElement.textContent = "00";
+                    hoursElement.textContent = "00";
+                    minutesElement.textContent = "00";
+                    secondsElement.textContent = "00";
+
+                    countdownElement.setAttribute(
+                        "aria-label",
+                        "The NHS Staff Survey has now closed"
+                    );
+
+                    return;
+                }
+
+                const days = Math.floor(
+                    difference / (1000 * 60 * 60 * 24)
+                );
+
+                const hours = Math.floor(
+                    (difference % (1000 * 60 * 60 * 24)) /
+                    (1000 * 60 * 60)
+                );
+
+                const minutes = Math.floor(
+                    (difference % (1000 * 60 * 60)) /
+                    (1000 * 60)
+                );
+
+                const seconds = Math.floor(
+                    (difference % (1000 * 60)) /
+                    1000
+                );
+
+                daysElement.textContent =
+                    String(days).padStart(2, "0");
+
+                hoursElement.textContent =
+                    String(hours).padStart(2, "0");
+
+                minutesElement.textContent =
+                    String(minutes).padStart(2, "0");
+
+                secondsElement.textContent =
+                    String(seconds).padStart(2, "0");
+
+                countdownElement.setAttribute(
+                    "aria-label",
+                    days + " days, " +
+                    hours + " hours, " +
+                    minutes + " minutes and " +
+                    seconds + " seconds remaining"
+                );
+            }
+
+            updateCountdown();
+            window.setInterval(updateCountdown, 1000);
+        });
+    </script>
+
+</body>
+</html>
